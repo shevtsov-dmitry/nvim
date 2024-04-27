@@ -93,7 +93,7 @@ vim.opt.splitbelow = true
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = '  ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
@@ -115,8 +115,8 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>de', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -233,13 +233,15 @@ require('lazy').setup({
             -- Document existing key chains
             require('which-key').register {
                 ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-                ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+                ['<leader>d'] = { name = '[D]iagnostics', _ = 'which_key_ignore' },
                 ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+                ['<leader>g'] = { name = '[G]o to', _ = 'which_key_ignore' },
+                ['<leader>f'] = { name = '[F]ind', _ = 'which_key_ignore' },
                 ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
                 ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
                 ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-                ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
             }
+
             -- visual mode
             require('which-key').register({
                 ['<leader>h'] = { 'Git [H]unk' },
@@ -413,6 +415,8 @@ require('lazy').setup({
                     --
                     -- In this case, we create a function that lets us more easily define mappings specific
                     -- for LSP related items. It sets the mode, buffer and description for us each time.
+                    --
+                    -- LSP MAPPING FOR NORMAL MODE
                     local map = function(keys, func, desc)
                         vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
                     end
@@ -457,6 +461,12 @@ require('lazy').setup({
                     -- WARN: This is not Goto Definition, this is Goto Declaration.
                     --  For example, in C this would take you to the header.
                     map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+                    -- LSP MAPPING FOR VISUAL MODE
+                    map = function(keys, func, desc)
+                        vim.keymap.set('v', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+                    end
+                    map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
                     -- The following two autocommands are used to highlight references of the
                     -- word under your cursor when your cursor rests there for a little while.
@@ -664,7 +674,6 @@ require('lazy').setup({
                     end,
                 },
                 completion = { completeopt = 'menu,menuone,noinsert' },
-
                 -- For an understanding of why these mappings were
                 -- chosen, you will need to read `:help ins-completion`
                 --
@@ -816,9 +825,8 @@ require('lazy').setup({
     --  Uncomment any of the lines below to enable them (you will need to restart nvim).
     --
     -- require 'kickstart.plugins.debug',
-    -- require 'kickstart.plugins.indent_line',
+    require 'kickstart.plugins.indent_line',
     -- require 'kickstart.plugins.lint',
-    -- require 'kickstart.plugins.neo-tree',
     -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
     -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
