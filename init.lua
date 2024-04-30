@@ -527,18 +527,16 @@ require('lazy').setup({
             --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
             --
             local servers = {
-                clangd = {},
-                jdtls = {},
-                -- gopls = {},
+                gopls = {},
                 -- pyright = {},
-                -- rust_analyzer = {},
+                rust_analyzer = {},
+                tsserver = {},
                 -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
                 --
                 -- Some languages (like typescript) have entire language plugins that can be useful:
                 --    https://github.com/pmizio/typescript-tools.nvim
                 --
                 -- But for many setups, the LSP (`tsserver`) will work just fine
-                -- tsserver = {},
                 --
 
                 lua_ls = {
@@ -717,7 +715,7 @@ require('lazy').setup({
                         local line = vim.fn.getline '.' -- Get the current line
                         local next_char = string.sub(line, col, col) -- Get the character after the cursor
 
-                        if next_char == ']' or next_char == ')' or next_char == '}' then
+                        if next_char == ']' or next_char == ')' or next_char == '}' or next_char == '>' then
                             -- Move the cursor forward if the next character is ], ), or }
                             vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Right>', true, false, true), 'n', false)
                         elseif luasnip.expand_or_locally_jumpable() then
@@ -824,10 +822,10 @@ require('lazy').setup({
     --  Here are some example plugins that I've included in the Kickstart repository.
     --  Uncomment any of the lines below to enable them (you will need to restart nvim).
     --
-    -- require 'kickstart.plugins.debug',
+    require 'kickstart.plugins.debug',
     require 'kickstart.plugins.indent_line',
-    -- require 'kickstart.plugins.lint',
-    -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+    require 'kickstart.plugins.lint',
+    require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
     -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
     --    This is the easiest way to modularize your config.
