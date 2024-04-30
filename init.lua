@@ -715,7 +715,7 @@ require('lazy').setup({
                         local line = vim.fn.getline '.' -- Get the current line
                         local next_char = string.sub(line, col, col) -- Get the character after the cursor
 
-                        if next_char == ']' or next_char == ')' or next_char == '}' or next_char == '>' then
+                        if next_char == ']' or next_char == ')' or next_char == '}' or next_char == '>' or next_char == '"' or next_char == "'" then
                             -- Move the cursor forward if the next character is ], ), or }
                             vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Right>', true, false, true), 'n', false)
                         elseif luasnip.expand_or_locally_jumpable() then
