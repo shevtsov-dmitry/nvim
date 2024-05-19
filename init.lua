@@ -80,6 +80,7 @@ vim.opt.signcolumn = 'yes'
 
 -- Decrease update time
 vim.opt.updatetime = 250
+vim.wo.wrap = false
 
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner

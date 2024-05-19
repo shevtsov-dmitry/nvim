@@ -1,35 +1,54 @@
 -- ### THEME ###
 return {
-    { -- You can easily change to a different colorscheme.
-        -- Change the name of the colorscheme plugin below, and then
-        -- change the command in the config to whatever the name of that colorscheme is.
-        --
-        -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-        'navarasu/onedark.nvim',
-        priority = 1000, -- Make sure to load this before all the other start plugins.
-        opts = {
-            transparent = true,
-            term_colors = true, -- Change terminal color as per the selected theme style
-        },
-        init = function()
-            -- Load the colorscheme here.
-            -- Like many other themes, this one has different styles, and you could load
-            -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-            -- vim.go.background = 'dark'
-            -- vim.opt.background = 'light' -- set this to dark or light
-            -- You can configure highlights by doing something like:
-            vim.cmd.hi 'Comment gui=none'
-            -- vim.cmd.colorscheme 'onedark'
-            -- vim.opt.termguicolors = true
-        end,
-    },
+    -- {
+    --     'navarasu/onedark.nvim',
+    --     priority = 1000, -- Make sure to load this before all the other start plugins.
+    --     opts = {
+    --         transparent = true,
+    --         term_colors = true, -- Change terminal color as per the selected theme style
+    --     },
+    --     init = function()
+    --         -- vim.go.background = 'dark'
+    --         -- vim.opt.background = 'light' -- set this to dark or light
+    --         vim.cmd.hi 'Comment gui=none'
+    --         vim.cmd.colorscheme 'onedark'
+    --         vim.opt.termguicolors = true
+    --     end,
+    -- },
+    -- {
+    --     'savq/melange-nvim',
+    --     priority = 1000,
+    --     init = function()
+    --         vim.cmd.colorscheme 'melange'
+    --         vim.opt.termguicolors = true
+    --         -- vim.opt.background = 'light'
+    --         vim.opt.background = 'dark'
+    --     end,
+    -- },
+    -- {
+    --     'rose-pine/neovim',
+    --     name = 'rose-pine',
+    --     -- opts = {},
+    --     -- config = {
+    --     --     -- vim.cmd("colorscheme rose-pine")
+    --     --     -- vim.cmd("colorscheme rose-pine-main")
+    --     --     -- vim.cmd("colorscheme rose-pine-moon")
+    --     --     -- vim.cmd 'colorscheme rose-pine-dawn',
+    --     -- },
+    --     config = function(_, opts)
+    --         require('rose-pine').setup(opts)
+    --         vim.cmd 'colorscheme rose-pine-dawn' -- Apply the base colorscheme
+    --     end,
+    -- },
     {
-        'savq/melange-nvim',
-        priority = 1000,
-        init = function()
-            vim.cmd.colorscheme 'melange'
-            vim.opt.termguicolors = true
-            vim.opt.background = 'light'
+        'nyoom-engineering/oxocarbon.nvim',
+        config = function()
+            vim.opt.background = 'dark' -- set this to dark or light
+            -- vim.opt.background = 'light' -- set this to dark or light
+            vim.cmd 'colorscheme oxocarbon'
         end,
+        -- event = foo,
+        -- config = bar
+        -- end,
     },
 }
