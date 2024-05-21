@@ -428,7 +428,7 @@ require('lazy').setup({
                     map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
 
                     -- Find references for the word under your cursor.
-                    map('fr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+                    map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 
                     -- Jump to the implementation of the word under your cursor.
                     --  Useful when your language has ways of declaring types without an actual implementation.
@@ -532,6 +532,7 @@ require('lazy').setup({
                 -- pyright = {},
                 rust_analyzer = {},
                 tsserver = {},
+                -- tailwindcss_language_server = {},
                 -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
                 --
                 -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -733,6 +734,9 @@ require('lazy').setup({
                     end, { 'i', 's' }),
                     -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
                     --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+                },
+                formatting = {
+                    format = require('tailwindcss-colorizer-cmp').formatter,
                 },
                 sources = {
                     { name = 'nvim_lsp' },

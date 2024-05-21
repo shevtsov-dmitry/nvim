@@ -15,16 +15,16 @@ return {
     --         vim.opt.termguicolors = true
     --     end,
     -- },
-    -- {
-    --     'savq/melange-nvim',
-    --     priority = 1000,
-    --     init = function()
-    --         vim.cmd.colorscheme 'melange'
-    --         vim.opt.termguicolors = true
-    --         -- vim.opt.background = 'light'
-    --         vim.opt.background = 'dark'
-    --     end,
-    -- },
+    {
+        'savq/melange-nvim',
+        priority = 1000,
+        init = function()
+            vim.cmd.colorscheme 'melange'
+            vim.opt.termguicolors = true
+            vim.opt.background = 'light'
+            -- vim.opt.background = 'dark'
+        end,
+    },
     -- {
     --     'rose-pine/neovim',
     --     name = 'rose-pine',
@@ -41,17 +41,17 @@ return {
     --     end,
     -- },
 
-    {
-        'nyoom-engineering/oxocarbon.nvim',
-        config = function()
-            vim.opt.background = 'dark' -- set this to dark or light
-            -- vim.opt.background = 'light' -- set this to dark or light
-            vim.cmd 'colorscheme oxocarbon'
-            -- vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
-            -- vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
-        end,
-        -- event = foo,
-        -- config = bar
-        -- end,
-    },
+    -- {
+    --     'nyoom-engineering/oxocarbon.nvim',
+    --     config = function()
+    --         vim.opt.background = 'dark' -- set this to dark or light
+    --         -- vim.opt.background = 'light' -- set this to dark or light
+    --         vim.cmd 'colorscheme oxocarbon'
+    --         -- vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+    --         -- vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
+    --     end,
+    --     -- event = foo,
+    --     -- config = bar
+    --     -- end,
+    -- },
 }
