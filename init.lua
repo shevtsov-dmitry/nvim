@@ -114,7 +114,9 @@ vim.opt.tabstop = 4
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-vim.api.nvim_set_keymap('n', '<C-BS>', '<C-W>', { noremap = true, silent = true })
+
+-- traditonal previous word delete aliases
+vim.api.nvim_set_keymap('i', '<C-BS>', '<C-W>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('i', '<A-BS>', '<C-W>', { noremap = true, silent = true })
 
 -- Diagnostic keymaps
@@ -141,10 +143,10 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+-- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+-- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+-- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -747,13 +749,13 @@ require('lazy').setup({
                     -- Accept ([y]es) the completion.
                     --  This will auto-import if your LSP supports it.
                     --  This will expand snippets if the LSP sent a snippet.
-                    ['<C-y>'] = cmp.mapping.confirm { select = true },
+                    -- ['<C-j>'] = cmp.mapping.confirm { select = true },
 
                     -- If you prefer more traditional completion keymaps,
                     -- you can uncomment the following lines
-                    --['<CR>'] = cmp.mapping.confirm { select = true },
-                    --['<Tab>'] = cmp.mapping.select_next_item(),
-                    --['<S-Tab>'] = cmp.mapping.select_prev_item(),
+                    ['<CR>'] = cmp.mapping.confirm { select = true },
+                    -- ['<Tab>'] = cmp.mapping.select_next_item(),
+                    -- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
                     -- Manually trigger a completion from nvim-cmp.
                     --  Generally you don't need this, because nvim-cmp will display
