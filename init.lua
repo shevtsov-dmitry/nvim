@@ -497,7 +497,10 @@ require('lazy').setup({
       -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
       -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
       -- See the full "keymap" documentation for information on defining your own keymap.
-      keymap = { preset = 'default' },
+      keymap = {
+        preset = 'default',
+        ['<C-k>'] = { 'select_and_accept' }, -- custom keymap
+      },
 
       appearance = {
         -- Sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -765,10 +768,13 @@ require('lazy').setup({
   { -- Autoformat
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
+    dependencies = {
+      'google/google-java-format',
+    },
     cmd = { 'ConformInfo' },
     keys = {
       {
-        '<leader>f',
+        '<A-S-F>',
         function()
           require('conform').format { async = true, lsp_format = 'fallback' }
         end,
@@ -794,8 +800,16 @@ require('lazy').setup({
           lsp_format = lsp_format_opt,
         }
       end,
+      formatters = {
+        google_java_format = {
+          command = 'google-java-format',
+          args = { '--aosp', '-i', '$FILENAME' }, -- Use file-based formatting
+          stdin = false, -- Must be false, because google-java-format doesn't support stdin
+        },
+      },
       formatters_by_ft = {
         lua = { 'stylua' },
+        java = { 'google_java_format' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -805,19 +819,14 @@ require('lazy').setup({
     },
   },
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
+  -- COLORSCHEME / THEME
+  {
+    'slugbyte/lackluster.nvim',
+    priority = 1000,
     init = function()
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
-
+      vim.cmd.colorscheme 'lackluster'
+      -- To disable any default colors, you can do the following:
+      vim.o.background = 'dark'
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
     end,
