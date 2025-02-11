@@ -107,6 +107,9 @@ vim.opt.number = true
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
+-- Set the cursor in insert mode to wide block
+vim.opt.guicursor = 'i:block'
+
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
@@ -149,6 +152,11 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
+
+-- shortcuts
+vim.api.nvim_set_keymap('i', '<C-BS>', '<C-W>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<A-BS>', '<C-W>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-.>', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
 
 -- Show which line your cursor is on
 vim.opt.cursorline = true
@@ -551,6 +559,9 @@ require('lazy').setup({
       -- Allows extra capabilities provided by nvim-cmp
       'hrsh7th/cmp-nvim-lsp',
     },
+    init = function()
+      require('lspconfig').gleam.setup {}
+    end,
     config = function()
       -- Brief aside: **What is LSP?**
       --
@@ -698,17 +709,13 @@ require('lazy').setup({
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+
+      -- See `:help lspconfig-all` for a list of all the pre-configured LSPs
       local servers = {
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
         -- rust_analyzer = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         jdtls = {},
 
@@ -820,17 +827,31 @@ require('lazy').setup({
   },
 
   -- COLORSCHEME / THEME
+  -- LIGHT
   {
-    'slugbyte/lackluster.nvim',
+    'polirritmico/monokai-nightasty.nvim',
+    lazy = false,
     priority = 1000,
     init = function()
-      vim.cmd.colorscheme 'lackluster'
+      vim.cmd.colorscheme 'monokai-nightasty'
       -- To disable any default colors, you can do the following:
-      vim.o.background = 'dark'
+      vim.o.background = 'light'
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
     end,
   },
+  -- DARK
+  -- {
+  --   'slugbyte/lackluster.nvim',
+  --   priority = 1000,
+  --   init = function()
+  --     vim.cmd.colorscheme 'lackluster'
+  --     -- To disable any default colors, you can do the following:
+  --     vim.o.background = 'dark'
+  --     -- You can configure highlights by doing something like:
+  --     vim.cmd.hi 'Comment gui=none'
+  --   end,
+  -- },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
