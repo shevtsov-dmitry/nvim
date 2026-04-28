@@ -1,3 +1,12 @@
+-- Ensure Space is your leader key
+vim.g.mapleader = " "
+
+-- Space + q to save and exit (forcefully)
+vim.keymap.set("n", "<leader>q", ":wq!<CR>", { desc = "Save and force quit" })
+
+-- Space + e to exit without saving (forcefully)
+vim.keymap.set("n", "qf", ":q!<CR>", { desc = "Force quit without saving" })
+
 -- Map Alt + Backspace and Ctrl + Backspace to delete the previous word
 vim.api.nvim_set_keymap("i", "<C-BS>", "<C-W>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("i", "<A-BS>", "<C-W>", { noremap = true, silent = true })
