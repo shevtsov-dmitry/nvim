@@ -14,7 +14,18 @@ require("lazy").setup({
   { "nvim-mini/mini.icons" },
   { "nvim-mini/mini.statusline", config = true },
   { "nvim-mini/mini.pairs", config = true },
-  { "nvim-mini/mini.files", config = true },
+  { "nvim-mini/mini.files", 
+		config = true, 	
+		keys = {
+			{
+				"<space>fm",
+				 function()
+        require("mini.files").open(vim.api.nvim_buf_get_name(0), true)
+      end,
+      desc = "Open mini.files (Directory of Current File)",
+			}
+		},
+	},
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" }, -- DEPRECATED!!!
 	{ "ibhagwan/fzf-lua" },
 	{
